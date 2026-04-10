@@ -18,20 +18,17 @@ async function saveToFile() {
   await Bun.write(filename, JSON.stringify(list));
 }
 
-// CRUD - CREATE
 export async function addItem(item: string) {
   await loadFromFile();
   list.push(item);
   await saveToFile();
 }
 
-// CRUD - READ
 export async function getItems() {
   await loadFromFile();
   return list;
 }
 
-// CRUD - UPDATE
 export async function updateItem(index: number, newItem: string) {
   await loadFromFile();
   if (index < 0 || index >= list.length)
@@ -40,7 +37,6 @@ export async function updateItem(index: number, newItem: string) {
   await saveToFile();
 }
 
-// CRUD - DELETE
 export async function removeItem(index: number) {
   await loadFromFile();
   if (index < 0 || index >= list.length)
@@ -49,5 +45,4 @@ export async function removeItem(index: number) {
   await saveToFile();
 }
 
-// EXPORTA AS FUNÇÕES PARA USO EXTERNO
 export default { addItem, getItems, updateItem, removeItem };
