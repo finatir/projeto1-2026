@@ -1,15 +1,13 @@
 {
   "compilerOptions": {
-    /* Configurações básicas */
+  
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext"],
 
-    /* Resolução de Tipos - O que você precisa para o 'process' */
     "types": ["node"],
     "typeRoots": ["../node_modules/@types", "./node_modules/@types"],
 
-    /* Rigor de checagem (Recomendado) */
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
