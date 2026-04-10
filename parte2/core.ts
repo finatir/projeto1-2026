@@ -2,14 +2,8 @@ declare const Bun: any;
 
 export class Item {
   private description: string;
-  // NOVO: armazena o status de conclusão da tarefa.
-  // É private para seguir o encapsulamento — só pode ser alterado pelos métodos da classe.
   private completed: boolean;
 
-  // MUDANÇA: o constructor agora aceita um segundo parâmetro opcional 'completed'.
-  // O valor padrão é false, então new Item("tarefa") cria uma tarefa pendente.
-  // O parâmetro existe para que o loadFromFile() consiga recriar itens
-  // que já estavam salvos como concluídos no arquivo JSON.
   constructor(description: string, completed: boolean = false) {
     this.description = description;
     this.completed = completed;
@@ -19,15 +13,11 @@ export class Item {
     this.description = newDescription;
   }
 
-  // NOVO: alterna o status de concluído/pendente e retorna o novo valor.
-  // O cli.ts usa o valor retornado para exibir a mensagem correta ao usuário.
   toggleCompleted() {
     this.completed = !this.completed;
     return this.completed;
   }
 
-  // MUDANÇA: toJSON() agora inclui o campo 'completed' além de 'description'.
-  // Isso garante que o status seja salvo no arquivo JSON e recuperado corretamente.
   toJSON() {
     return {
       description: this.description,
@@ -61,8 +51,7 @@ export class ToDo {
     if (!(await file.exists()))
       return [];
     const data = await file.text();
-    // MUDANÇA: agora passa itemData.completed para o constructor do Item
-    // para restaurar o status salvo. Antes só passava itemData.description.
+
     return JSON.parse(data).map((itemData: any) => new Item(itemData.description, itemData.completed));
   }
 
@@ -92,8 +81,6 @@ export class ToDo {
     this.saveToFile();
   }
 
-  // NOVO: encontra o item pelo índice, chama toggleCompleted() nele e salva.
-  // Retorna o novo estado para o cli.ts exibir a mensagem certa.
   async toggleItem(index: number) {
     const items = await this.items;
     if (index < 0 || index > items.length)
