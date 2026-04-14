@@ -1,1 +1,15 @@
-projeto 1 - 2026, Filipe Sousa Rodrigues ia24
+# projeto1-2026
+
+To install dependencies:
+
+```bash
+bun install
+```
+
+To run:
+
+```bash
+bun run index.ts
+```
+
+This project was created using `bun init` in bun v1.3.12. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
